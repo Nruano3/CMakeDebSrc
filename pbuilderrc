@@ -11,6 +11,10 @@ fi
 if [ "${ARCH}" == "armhf" ]; then
    MIRRORSITE="http://ports.ubuntu.com/ubuntu-ports"
    OTHERMIRROR="deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports ${DIST}-updates main universe multiverse | deb [trusted=yes] http://repos.rcn-ee.com/ubuntu/ ${DIST} main"
+
+elif [ "${ARCH}" == "arm64" ]; then
+   MIRRORSITE="http://ports.ubuntu.com/ubuntu-ports"
+   OTHERMIRROR="deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports ${DIST}-updates main universe multiverse | deb [trusted=yes] http://repos.rcn-ee.com/ubuntu/ ${DIST} main"
           
 elif [ "${ARCH}" == "amd64" ] || ["${ARCH}" == "i386"]; then
    MIRRORSITE="http://us.archive.ubuntu.com/ubuntu/"
@@ -20,6 +24,11 @@ fi
 if [ "$ARCH" == "armhf" ] && [ "$(dpkg --print-architecture)" != "armhf" ]; then
     DEBOOTSTRAP="qemu-debootstrap"
 fi
+
+if [ "$ARCH" == "arm64" ] && [ "$(dpkg --print-architecture)" != "arm64" ]; then
+    DEBOOTSTRAP="qemu-debootstrap"
+fi
+
 if [ "$ARCH" == "armel" ] && [ "$(dpkg --print-architecture)" != "armel" ]; then
     DEBOOTSTRAP="qemu-debootstrap"
 fi
