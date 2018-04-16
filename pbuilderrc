@@ -8,15 +8,11 @@ if [ "$ARCH" == "" ]; then
     exit 1
 fi
 
-if [ "${ARCH}" == "armhf" ]; then
+if [ "${ARCH}" == "armhf" ] || [ "${ARCH}" == "arm64" ]; then
    MIRRORSITE="http://ports.ubuntu.com/ubuntu-ports"
-   OTHERMIRROR="deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports ${DIST}-updates main universe multiverse | deb [trusted=yes] http://repos.rcn-ee.com/ubuntu/ ${DIST} main"
-
-elif [ "${ARCH}" == "arm64" ]; then
-   MIRRORSITE="http://ports.ubuntu.com/ubuntu-ports"
-   OTHERMIRROR="deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports ${DIST}-updates main universe multiverse | deb [trusted=yes] http://repos.rcn-ee.com/ubuntu/ ${DIST} main"
+   OTHERMIRROR="deb [arch=${ARCH}] http://ports.ubuntu.com/ubuntu-ports ${DIST}-updates main universe multiverse | deb [trusted=yes] http://repos.rcn-ee.com/ubuntu/ ${DIST} main"
           
-elif [ "${ARCH}" == "amd64" ] || ["${ARCH}" == "i386"]; then
+elif [ "${ARCH}" == "amd64" ] || [ "${ARCH}" == "i386" ]; then
    MIRRORSITE="http://us.archive.ubuntu.com/ubuntu/"
    COMPONENTS="main restricted universe multiverse"   
 fi
